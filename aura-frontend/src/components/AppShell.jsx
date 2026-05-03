@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import AvatarCircle from "./AvatarCircle";
+import BrandWordmark from "./BrandWordmark";
 
 const AppShell = ({ user, onLogout, activeSection, onNavigate, children }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -30,9 +31,11 @@ const AppShell = ({ user, onLogout, activeSection, onNavigate, children }) => {
           <div className={`flex ${collapsed ? "w-full flex-col items-center gap-4" : "flex-col gap-4"}`}>
             <div className={`flex ${collapsed ? "w-full justify-center" : "items-center justify-between"}`}>
               <div className={`flex items-center ${collapsed ? "justify-center" : "gap-3"}`}>
-                <div className="flex h-12 w-12 items-center justify-center rounded-[18px] border border-aura-gold/30 bg-aura-gold/10 shadow-[0_0_24px_rgba(214,164,76,0.2)]">
-                  <span className="font-display text-xl text-aura-sand">A</span>
-                </div>
+                <img
+                  src="/aura-logo.png"
+                  alt="AURA logo"
+                  className="h-12 w-12 rounded-[18px] object-cover shadow-[0_0_24px_rgba(214,164,76,0.16)]"
+                />
                 {!collapsed ? (
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.34em] text-aura-gold">AURA</p>
@@ -153,7 +156,10 @@ const AppShell = ({ user, onLogout, activeSection, onNavigate, children }) => {
               Menu
             </button>
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-aura-gold">AURA Workspace</p>
+              <div className="flex items-center gap-3">
+                <BrandWordmark compact textSize="sm" />
+                <p className="text-xs uppercase tracking-[0.3em] text-aura-gold">Workspace</p>
+              </div>
               <h1 className="mt-2 font-display text-3xl capitalize text-white">
                 {sections.find((section) => section.key === activeSection)?.label || activeSection}
               </h1>
