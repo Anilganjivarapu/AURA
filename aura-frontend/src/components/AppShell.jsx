@@ -174,21 +174,21 @@ const AppShell = ({ user, onLogout, activeSection, onNavigate, children }) => {
       </aside>
 
       <main className="flex-1 space-y-6">
-        <div className="glass-panel flex items-center justify-between gap-4 p-4 md:p-5">
-          <div className="flex items-center gap-3">
+        <div className="glass-panel flex items-start justify-between gap-3 p-4 md:items-center md:gap-4 md:p-5">
+          <div className="flex min-w-0 flex-1 items-start gap-3">
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="rounded-2xl border border-white/10 px-3 py-2 text-xs uppercase tracking-[0.2em] text-slate-300 xl:hidden"
+              className="mt-1 rounded-2xl border border-white/10 px-3 py-2 text-xs uppercase tracking-[0.2em] text-slate-300 xl:hidden"
             >
               Menu
             </button>
-            <div>
-              <div className="flex items-center gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3">
                 <BrandWordmark compact textSize="sm" />
-                <p className="text-xs uppercase tracking-[0.3em] text-aura-gold">Workspace</p>
+                <p className="hidden text-xs uppercase tracking-[0.22em] text-aura-gold sm:block">Workspace</p>
               </div>
-              <h1 className="mt-2 font-display text-3xl capitalize text-white">
+              <h1 className="mt-2 break-words font-display text-2xl capitalize leading-tight text-white sm:text-3xl">
                 {sections.find((section) => section.key === activeSection)?.label || activeSection}
               </h1>
             </div>
@@ -196,7 +196,7 @@ const AppShell = ({ user, onLogout, activeSection, onNavigate, children }) => {
           <button
             type="button"
             onClick={() => onNavigate("profile")}
-            className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-3 py-2"
+            className="shrink-0 rounded-full border border-white/10 bg-white/5 p-2 sm:flex sm:items-center sm:gap-3 sm:px-3 sm:py-2"
           >
             <AvatarCircle user={user} size="sm" />
             <span className="hidden text-sm text-slate-300 md:inline">{user.name}</span>

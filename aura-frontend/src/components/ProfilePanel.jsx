@@ -47,9 +47,11 @@ const ProfilePanel = ({ user, onSave, message }) => {
     <div className="grid gap-6 xl:grid-cols-[0.7fr_1.3fr]">
       <div className="glass-panel p-6">
         <div className="flex flex-col items-center text-center">
-          <AvatarCircle user={{ ...user, avatar: form.avatar, name: form.name }} size="lg" />
-          <h3 className="mt-4 font-display text-3xl text-white">{form.name || "Your profile"}</h3>
-          <p className="mt-2 text-sm text-slate-400">{user.email}</p>
+          <AvatarCircle user={{ ...user, avatar: form.avatar, name: form.name }} size="md" />
+          <h3 className="mt-4 break-words font-display text-2xl leading-tight text-white sm:text-3xl">
+            {form.name || "Your profile"}
+          </h3>
+          <p className="mt-2 break-all text-sm text-slate-400">{user.email}</p>
           <label className="secondary-button mt-5 cursor-pointer">
             Upload photo
             <input type="file" accept="image/*" className="hidden" onChange={handleFile} />
