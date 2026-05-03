@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --aura-night: #08111f;
+    --aura-ink: #101b2d;
+    --aura-card: rgba(16, 27, 45, 0.72);
+    --aura-border: rgba(243, 229, 199, 0.14);
+    --aura-text: #ecf3ff;
+    --aura-muted: #9fb0cb;
+    --aura-gold: #d6a44c;
+    --aura-coral: #f27f63;
+    --aura-teal: #48b8b2;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  body {
+    @apply min-h-screen bg-aura-grid bg-aura-night font-body text-white antialiased;
+    margin: 0;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply rounded-[28px] border border-white/10 bg-white/5 shadow-aura backdrop-blur-xl;
+  }
+
+  .section-title {
+    @apply font-display text-2xl text-white;
+  }
+
+  .field-shell {
+    @apply rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:border-aura-gold focus:outline-none focus:ring-2 focus:ring-aura-gold/30;
+  }
+
+  .primary-button {
+    @apply inline-flex items-center justify-center rounded-2xl bg-aura-gold px-5 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110;
+  }
+
+  .secondary-button {
+    @apply inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10;
+  }
+}
+
+.auth-stage {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(72, 184, 178, 0.2), transparent 30%),
+    radial-gradient(circle at 80% 20%, rgba(214, 164, 76, 0.22), transparent 28%),
+    radial-gradient(circle at 50% 80%, rgba(242, 127, 99, 0.16), transparent 32%),
+    linear-gradient(135deg, #040811 0%, #0a1224 35%, #111f38 100%);
+}
+
+.auth-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(30px);
+  opacity: 0.45;
+  animation: auraFloat 8s ease-in-out infinite;
+}
+
+.auth-orb-one {
+  left: 6%;
+  top: 12%;
+  height: 14rem;
+  width: 14rem;
+  background: rgba(72, 184, 178, 0.2);
+}
+
+.auth-orb-two {
+  right: 8%;
+  top: 18%;
+  height: 18rem;
+  width: 18rem;
+  background: rgba(214, 164, 76, 0.18);
+  animation-delay: 1.5s;
+}
+
+.auth-orb-three {
+  bottom: 10%;
+  left: 38%;
+  height: 16rem;
+  width: 16rem;
+  background: rgba(242, 127, 99, 0.16);
+  animation-delay: 3s;
+}
+
+.auth-particle {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+  animation: particleRise 9s linear infinite;
+}
+
+@keyframes auraFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+@keyframes particleRise {
+  0% {
+    transform: translateY(0px);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-80px);
+    opacity: 0.1;
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-surface {
+    box-shadow: none !important;
+    background: white !important;
+    color: black !important;
+    border: 1px solid #d1d5db !important;
+  }
+}
+
+.aura-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(214, 164, 76, 0.45) transparent;
+}
+
+.aura-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.aura-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.aura-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: rgba(214, 164, 76, 0.35);
+}
