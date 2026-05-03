@@ -65,6 +65,7 @@ const DashboardPage = () => {
   const [screenMessage, setScreenMessage] = useState("");
   const [checkoutState, setCheckoutState] = useState(null);
   const [contactForm, setContactForm] = useState({ name: "", phone: "", message: "" });
+  const [enquirySuccess, setEnquirySuccess] = useState(false);
 
   const loadWorkspace = useCallback(async () => {
     try {
@@ -118,6 +119,18 @@ const DashboardPage = () => {
       loadWorkspace();
     }
   }, [user, loadWorkspace]);
+
+  useEffect(() => {
+    if (!enquirySuccess) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setEnquirySuccess(false);
+    }, 3500);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [enquirySuccess]);
 
   const handleLogout = () => {
     logout();
@@ -247,9 +260,10 @@ const DashboardPage = () => {
 
     try {
       await enquiryService.create(contactForm);
-      setScreenMessage("Enquiry submitted successfully.");
+      setEnquirySuccess(true);
       setContactForm({ name: "", phone: "", message: "" });
     } catch (error) {
+      setEnquirySuccess(false);
       setScreenMessage(extractError(error));
     }
   };
@@ -467,6 +481,17 @@ const DashboardPage = () => {
               <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300">
                 Share what you need and the AURA team can respond on courses, fees, onboarding, or platform support.
               </p>
+              {enquirySuccess ? (
+                <div className="success-glow-card mt-6">
+                  <div className="success-glow-icon">
+                    <span className="success-glow-check" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">Sent to us successfully</p>
+                    <p className="mt-1 text-sm text-teal-50/90">Your enquiry has reached the AURA team.</p>
+                  </div>
+                </div>
+              ) : null}
               <div className="mt-6 space-y-4">
                 <input
                   value={contactForm.name}

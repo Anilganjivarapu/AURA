@@ -134,6 +134,50 @@
   }
 }
 
+.success-glow-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(72, 184, 178, 0.3);
+  background: radial-gradient(circle at top, rgba(72, 184, 178, 0.24), rgba(72, 184, 178, 0.1) 48%, rgba(8, 17, 31, 0.82) 100%);
+  box-shadow: 0 0 30px rgba(72, 184, 178, 0.18);
+  padding: 1rem 1.1rem;
+  animation: successGlowIn 0.45s ease-out;
+}
+
+.success-glow-icon {
+  display: flex;
+  height: 3rem;
+  width: 3rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgba(72, 184, 178, 0.22);
+  box-shadow: 0 0 28px rgba(72, 184, 178, 0.28);
+}
+
+.success-glow-check {
+  display: block;
+  height: 0.75rem;
+  width: 1.1rem;
+  border-bottom: 3px solid #dffcf8;
+  border-left: 3px solid #dffcf8;
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+@keyframes successGlowIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media print {
   body {
     background: white !important;
