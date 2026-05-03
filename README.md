@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AURA Full Stack Platform
 
 AURA is a premium full stack learning platform starter built with:
@@ -128,3 +129,7 @@ When running in backend demo mode:
 - The payment flow is structured for Razorpay but currently uses a demo-ready checkout object until live credentials and provider verification are added.
 - Materials upload is currently URL-based to avoid adding file storage dependencies in the first version.
 - PDF export is handled through the browser print dialog from the report section.
+=======
+# AURA
+AURA is an edutech platform currently being developed and Maintained by Anil Ganjivarapu
+>>>>>>> 1ee55528e8b8f3fde6c9f676e2fe8a2cae1c161d

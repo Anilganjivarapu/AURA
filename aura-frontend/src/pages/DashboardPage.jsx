@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import AppShell from "../components/AppShell";
@@ -66,7 +66,7 @@ const DashboardPage = () => {
   const [checkoutState, setCheckoutState] = useState(null);
   const [contactForm, setContactForm] = useState({ name: "", phone: "", message: "" });
 
-  const loadWorkspace = async () => {
+  const loadWorkspace = useCallback(async () => {
     try {
       const [overviewRes, coursesRes, materialsRes, paymentsRes, reportRes, siteRes, chatRes] = await Promise.all([
         dashboardService.overview(),
@@ -96,13 +96,13 @@ const DashboardPage = () => {
     } catch (error) {
       setScreenMessage(extractError(error));
     }
-  };
+  }, [user?.role]);
 
   useEffect(() => {
     if (user) {
       loadWorkspace();
     }
-  }, [user]);
+  }, [user, loadWorkspace]);
 
   const handleLogout = () => {
     logout();
