@@ -68,28 +68,37 @@ const DashboardPage = () => {
 
   const loadWorkspace = useCallback(async () => {
     try {
-      const [overviewRes, coursesRes, materialsRes, paymentsRes, reportRes, siteRes, chatRes] = await Promise.all([
+      const baseRequests = [
         dashboardService.overview(),
         courseService.list(),
         materialService.list(),
         paymentService.history(),
-        reportService.summary(),
         adminService.getSiteContent(),
         chatbotService.history(),
-      ]);
+      ];
+
+      if (user?.role === "admin") {
+        baseRequests.push(reportService.summary());
+      }
+
+      const responses = await Promise.all(baseRequests);
+      const [overviewRes, coursesRes, materialsRes, paymentsRes, siteRes, chatRes, reportRes] = responses;
 
       setDashboard(overviewRes);
       setCourses(coursesRes.courses || []);
       setMaterials(materialsRes.materials || []);
       setPayments(paymentsRes.payments || []);
-      setReport(reportRes.report);
       setSiteContent(siteRes.content || {});
       setChatHistory(chatRes.history || []);
+      setReport(user?.role === "admin" ? reportRes?.report || null : null);
 
       if (user.role === "admin") {
         const [adminRes, usersRes] = await Promise.all([adminService.summary(), adminService.users()]);
         setAdminSummary(adminRes.summary);
         setUsers(usersRes.users || []);
+      } else {
+        setAdminSummary(null);
+        setUsers([]);
       }
 
       setScreenMessage("");
@@ -97,6 +106,12 @@ const DashboardPage = () => {
       setScreenMessage(extractError(error));
     }
   }, [user?.role]);
+
+  useEffect(() => {
+    if (activeSection === "reports" && user?.role !== "admin") {
+      setActiveSection("home");
+    }
+  }, [activeSection, user?.role]);
 
   useEffect(() => {
     if (user) {
@@ -387,7 +402,7 @@ const DashboardPage = () => {
         </SectionCard>
       ) : null}
 
-      {activeSection === "reports" ? (
+      {activeSection === "reports" && user.role === "admin" ? (
         <SectionCard
           title="Reports"
           eyebrow="Reports"

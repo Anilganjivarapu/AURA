@@ -13,7 +13,7 @@ const AppShell = ({ user, onLogout, activeSection, onNavigate, children }) => {
     { key: "materials", label: "Materials", compactLabel: "Files" },
     { key: "payments", label: "Payments", compactLabel: "Pay" },
     { key: "assistant", label: "AI Assistant", compactLabel: "AI" },
-    { key: "reports", label: "Reports", compactLabel: "Reports" },
+    ...(user.role === "admin" ? [{ key: "reports", label: "Reports", compactLabel: "Reports" }] : []),
     { key: "about", label: "About Us", compactLabel: "About" },
     { key: "contact", label: "Contact", compactLabel: "Contact" },
     ...(user.role === "admin" ? [{ key: "users", label: "Users", compactLabel: "Users" }] : []),
